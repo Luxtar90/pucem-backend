@@ -7,8 +7,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig*.json ./
 
-# Instalar dependencias de producción
-RUN npm ci --only=production
+# Instalar dependencias incluyendo las de desarrollo (necesarias para el build)
+RUN npm ci
 
 # Copiar el resto de la aplicación
 COPY . .
