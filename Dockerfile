@@ -1,5 +1,4 @@
-# Etapa de construcción
-FROM node:20-alpine AS builder
+FROM node:20-bullseye
 
 WORKDIR /app
 

@@ -10,13 +10,13 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { ConsultationService } from './consultation.service';
-import { CreateConsultationInitialDto } from './dto/create-consultation-initial.dto';
-import { CreateConsultationSubsequentDto } from './dto/create-consultation-subsequent.dto';
+import { ConsultationService } from '@/consultation/consultation.service';
+import { CreateConsultationInitialDto } from '@/consultation/dto/create-consultation-initial.dto';
+import { CreateConsultationSubsequentDto } from '@/consultation/dto/create-consultation-subsequent.dto';
 import { ApiBody, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { Request, Response } from 'express';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { PdfService } from '../common/services/pdf.service'; // Corregir importación
+import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
+import { PdfService } from '@/common/services/pdf.service'; // Corregir importación
 
 // Extender la interfaz Request para incluir el usuario
 interface RequestWithUser extends Request {
@@ -116,16 +116,18 @@ export class ConsultationController {
   }
 
   // consultations.controller.ts
-@Get('download/:id')
-@ApiOperation({ summary: 'Download one external consultation as PDF' })
-async downloadOne(@Param('id', ParseUUIDPipe) id: string, @Res() res: Response) {
-  const one = await this.consultationService.findOneInitial(id);
-  const buffer = await this.pdfService.generatePdf([one], 'Consulta Externa');
-  res.set({
-    'Content-Type': 'application/pdf',
-    'Content-Disposition': `attachment; filename=consulta-${id}.pdf`,
-  });
-  return res.send(buffer);
-}
-
+  @Get('download/:id')
+  @ApiOperation({ summary: 'Download one external consultation as PDF' })
+  async downloadOne(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Res() res: Response,
+  ) {
+    const one = await this.consultationService.findOneInitial(id);
+    const buffer = await this.pdfService.generatePdf([one], 'Consulta Externa');
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename=consulta-${id}.pdf`,
+    });
+    return res.send(buffer);
+  }
 }

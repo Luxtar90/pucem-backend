@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  Index
+  // Index,
 } from 'typeorm';
 
 @Entity({ name: 'neurologicas' })
@@ -63,9 +63,11 @@ export class Neurologica {
   @Column('text', { nullable: true })
   entornoFamiliar?: string;
 
+  @Column('jsonb', { nullable: true })
+  bodyMap?: any; // partes seleccionadas / niveles - descripcion opcional
 
-  @Column('jsonb', { nullable: true }) bodyMap?: any;           // partes seleccionadas / niveles
-  @Column('jsonb', { nullable: true }) dolorRegistros?: any[];  // {region, tiempo, irradiado, tipo, evn, subjetiva, alivian, agravan, comentarios}
+  @Column('jsonb', { nullable: true })
+  dolorRegistros?: any[]; // {region, tiempo, irradiado, tipo, evn, subjetiva, alivian, agravan, comentarios}
 
   // Alteraciones de la marcha
   @Column('boolean', { default: false })
@@ -158,7 +160,6 @@ export class Neurologica {
   vistaLateralIzquierdaUrl?: string;
   // Observaciones Screening Postural (texto)
 
-
   @Column('text', { nullable: true })
   observacionesVistaAnterior?: string;
 
@@ -184,8 +185,6 @@ export class Neurologica {
 
   // ===============================================
 
-
-  
   @CreateDateColumn()
   createdAt: Date;
 

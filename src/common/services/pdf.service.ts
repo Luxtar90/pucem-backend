@@ -125,7 +125,9 @@ export class PdfService {
     const yesNo = (b?: any) => (b ? 'SI' : 'NO');
     const pills = (arr?: any[]) =>
       Array.isArray(arr) && arr.length
-        ? arr.map((x) => `<span class="pill">${this.escape(String(x))}</span>`).join(' ')
+        ? arr
+            .map((x) => `<span class="pill">${this.escape(String(x))}</span>`)
+            .join(' ')
         : '<span class="muted">—</span>';
 
     const kv = (label: string, value: any) => `
@@ -217,14 +219,17 @@ export class PdfService {
       </table>
     `;
 
-  // CIF (array)
-const cif = `
+    // CIF (array)
+    const cif = `
   <div>
     <h3>XIV. CIF (Estructuras Anatómicas)</h3>
     ${
       Array.isArray(row.cif) && row.cif.length
         ? row.cif
-            .map((c: any) => `<span class="pill">${this.escape(c.codigo)} — ${this.escape(c.descripcion)}</span>`)
+            .map(
+              (c: any) =>
+                `<span class="pill">${this.escape(c.codigo)} — ${this.escape(c.descripcion)}</span>`,
+            )
             .join(' ')
         : '<span class="muted">Sin registros</span>'
     }
@@ -342,7 +347,8 @@ const cif = `
   // ================== utils ==================
 
   private pretty(v: any): string {
-    if (v === null || typeof v === 'undefined') return '<span class="muted">—</span>';
+    if (v === null || typeof v === 'undefined')
+      return '<span class="muted">—</span>';
     if (Array.isArray(v)) {
       if (!v.length) return '<span class="muted">—</span>';
       return v.map((x) => this.escape(String(x))).join(', ');

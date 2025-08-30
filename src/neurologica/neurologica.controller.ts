@@ -27,24 +27,26 @@ import {
 import { Response as ExpressResponse, Request } from 'express';
 import type { Express } from 'express'; // ⬅️ TIPOS para Multer
 
-import { NeurologicaService } from './neurologica.service';
-import { CreateNeurologicaDto } from './dto/create-neurologica.dto';
-import { UpdateNeurologicaDto } from './dto/update-neurologica.dto';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { Auth } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/users/entities/user.entity';
+import { NeurologicaService } from '@/neurologica/neurologica.service';
+import { CreateNeurologicaDto } from '@/neurologica/dto/create-neurologica.dto';
+import { UpdateNeurologicaDto } from '@/neurologica/dto/update-neurologica.dto';
+import { PaginationDto } from '@/common/dto/pagination.dto';
+import { Auth } from '@/auth/decorators/auth.decorator';
+import { Role } from '@/users/entities/user.entity';
 
-import { PdfService } from '../common/services/pdf.service';
+import { PdfService } from '@/common/services/pdf.service';
 
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
 // ---------- helpers para Multer ----------
+// eslint-disable-next-line @typescript-eslint/ban-types
 function fileNameEdit(_: any, file: Express.Multer.File, cb: Function) {
   const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
   cb(null, `${file.fieldname}-${unique}${extname(file.originalname)}`);
 }
+// eslint-disable-next-line @typescript-eslint/ban-types
 function imageFilter(_: any, file: Express.Multer.File, cb: Function) {
   if (/^image\/(png|jpe?g|gif|webp)$/i.test(file.mimetype)) cb(null, true);
   else cb(new Error('Solo imágenes (png/jpg/jpeg/gif/webp)'), false);

@@ -8,25 +8,5 @@ services:
     ports:
       - '3000:3000'
     environment:
-      NODE_ENV: production
-      PORT: 3000
-      # Agrega aquí otras variables de entorno necesarias
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:3000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
-        reservations:
-          memory: 512M
-    logging:
-      driver: 'json-file'
-      options:
-        max-size: '10m'
-        max-file: '3'
-
+      NODE_ENV: development
+    command: sh -c "npm install && npm run dev"

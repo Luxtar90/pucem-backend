@@ -12,7 +12,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-    })
+    }),
   );
 
   // Configure CORS: allow explicit FRONTEND_URL or fall back to common local dev ports
