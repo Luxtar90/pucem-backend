@@ -1,11 +1,12 @@
+version: '3.8'
+
 services:
-  backend_vinculation:
+  app:
     build: .
+    container_name: pucem-backend
+    restart: unless-stopped
     ports:
       - '3000:3000'
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
       NODE_ENV: development
     command: sh -c "npm install && npm run dev"
