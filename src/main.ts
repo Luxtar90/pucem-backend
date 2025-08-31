@@ -18,7 +18,7 @@ async function bootstrap() {
   // Configure CORS: allow explicit FRONTEND_URL or fall back to common local dev ports
   const allowedOrigins = process.env.FRONTEND_URL
     ? process.env.FRONTEND_URL.split(',').map((o) => o.trim())
-    : ['http://localhost:8000', 'http://localhost:3000'];
+    : ['http://localhost:8000', 'http://localhost:3000', 'https://sistema-salud-fronted.vercel.app'];
 
   app.enableCors({
     origin: allowedOrigins,
