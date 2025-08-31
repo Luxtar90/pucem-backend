@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ApiKeyService } from '@/api-key/api-key.service';
-import { ApiKeyController } from '@/api-key/api-key.controller';
+import { ApiKeyService } from './api-key.service';
+import { ApiKeyController } from './api-key.controller';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({

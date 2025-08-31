@@ -38,7 +38,7 @@ export class ApiKeyService {
         this.httpService.post(urlApiBody, postData, { headers }),
       );
 
-      const token = response.data.access_token;
+      const token = (response.data as { access_token: string }).access_token;
 
       if (!token) {
         throw new HttpException(
