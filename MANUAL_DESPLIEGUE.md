@@ -1,4 +1,4 @@
-# Manual de Despliegue - Backend PUCE Manta
+# Manual de Despliegue - Backend PUCE 
 
 ## Tabla de Contenidos
 - [Requisitos Previos](#requisitos-previos)
