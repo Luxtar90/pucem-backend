@@ -41,12 +41,14 @@ import { ApiKeyModule } from './api-key/api-key.module';
       synchronize: true,
       // TODO: Después de que Azure complete la actualización de certificados SSL intermedios (iniciada el 31 de enero de 2024),
       // descargar los nuevos certificados y volver a establecer rejectUnauthorized a true
-      ssl: {
-        rejectUnauthorized: false,
-        ca: fs
-          .readFileSync(path.join(__dirname, '../', process.env.DB_SSL_FILE!))
-          .toString(),
-      },
+      ssl: process.env.DB_SSL_FILE
+        ? {
+            rejectUnauthorized: false,
+            ca: fs
+              .readFileSync(path.join(__dirname, '../', process.env.DB_SSL_FILE))
+              .toString(),
+          }
+        : undefined,
       namingStrategy: new SnakeNamingStrategy(),
     }),
 
